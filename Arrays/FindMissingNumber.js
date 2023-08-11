@@ -53,6 +53,22 @@ function FindMissingNumberOptimal(arr1, numberOfElements) {
     return sumOfN - sum;
 }
 
+// Optimal using XOR
+function FindMissingNumberOptimalTwo(arr1, numberOfElements) {
+    let XOR1 = 0;
+    let XOR2 = 0;
+    let length = numberOfElements-1;
+
+    for (let i = 0; i < length; i++) {
+        XOR2 = XOR2 ^ arr1[i]; // For XOR2 we are taking the xor of array provided 1 ^ 2 ^ 4 ^ 5
+        XOR1 = XOR1 ^ (i + 1); // For XOR1 we want the natural number till the numberOfElements 1 ^ 2 ^ 3 ^ 4 ^ 5(This 5 is added later after the loop)
+    }
+
+    XOR1 = XOR1 ^ numberOfElements; 
+    return XOR1 ^ XOR2;
+}
+
 console.log("Brute:", FindMissingNumber([1, 2, 4, 5], 5)) // This means 3 number is missing 
 console.log("Best:", FindMissingNumberBest([1, 2, 4, 5], 5)) // This means 3 number is missing
 console.log("Optimal:", FindMissingNumberOptimal([1, 2, 4, 5], 5)) // This means 3 number is missing
+console.log("Optimal using XOR:", FindMissingNumberOptimalTwo([1, 2, 4, 5], 5)) // This means 3 number is missing
